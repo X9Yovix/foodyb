@@ -24,6 +24,15 @@ class UserController extends Controller
         return $user;
         //return "ok";
     }
+
+    public function login(Request $req){
+        $user = User::where('email',$req->email)->first();
+        //kan user faregh  wala pass ghalet
+        if(!$user || !Hash::check($req->password,$user->password)){
+            return ["error"=>"Email or pass ghalet"];
+        }
+        return $user;
+    }
     /**
      * Display a listing of the resource.
      *
