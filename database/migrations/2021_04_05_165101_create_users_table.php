@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('picture',255);
             $table->date('date_of_birth');
             $table->string('adresse',255);
-            $table->string('phone_number',50);
+            $table->string('phone_number',30);
             $table->string('email',50)->unique();
             $table->string('password',255);
             $table->softDeletes();
