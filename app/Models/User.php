@@ -22,4 +22,8 @@ class User extends Model
         'email',
         'password'
     ];
+
+    public function Restaurant(){
+        return $this->hasOne("App\Models\Restaurant");
+    }
 }
