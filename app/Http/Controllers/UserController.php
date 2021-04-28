@@ -15,7 +15,7 @@ class UserController extends Controller
         $user->first_name = $req->input('first_name');
         $user->last_name = $req->input('last_name');
 		$user->picture = $req->file('picture')->store('users', ['disk' => 'public']);
-		$user->date_of_birth =Carbon::createFromFormat('m/d/Y', $req->input('date_of_birth'))->format('Y-m-d');
+		$user->date_of_birth =Carbon::createFromFormat('d-m-Y', $req->input('date_of_birth'))->format('Y-m-d');
         $user->adresse = $req->input('adresse');
         $user->phone_number = $req->input('phone_number');
         $user->email = $req->input('email');
@@ -38,7 +38,6 @@ class UserController extends Controller
 		}
         
     }
-	
 	public function userInfo($id)
     {
         return User::where('id',$id)->get();
