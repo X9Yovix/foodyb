@@ -11,8 +11,7 @@ class User extends Model
     use SoftDeletes;
     protected $dates =['deleted_at'];
     protected $fillable =[
-        'cin',
-        'carte_sejour',
+        'id_card',
         'first_name',
         'last_name',
         'picture',

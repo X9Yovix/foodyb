@@ -14,6 +14,6 @@ class Restaurant extends Model
         'adresse',
         'picture',
         'total_reviews',
-        'user_id'
+        'id_card'
     ];
 }

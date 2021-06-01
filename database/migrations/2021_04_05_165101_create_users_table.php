@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('adresse',255)->nullable();
             $table->string('phone_number',30)->nullable();
-            $table->string('email',50)->unique()->nullable();
-            $table->string('password',255)->nullable();
-            $table->string('owner',50)->nullable();
+            $table->string('role',30)->default("client");
+            $table->string('email',50)->unique();
+            $table->string('password',255);
             $table->softDeletes();
             $table->timestamps();
         });

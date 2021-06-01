@@ -12,16 +12,16 @@ class UserController extends Controller
     public function register(Request $req){
         $user = new User();
         $user->id_card = $req->input('id_card');
-        $user->first_name = $req->input('first_name');
-        $user->last_name = $req->input('last_name');
-		$user->picture = $req->file('picture')->store('users', ['disk' => 'public']);
-		$user->date_of_birth =Carbon::createFromFormat('d-m-Y', $req->input('date_of_birth'))->format('Y-m-d');
-        $user->adresse = $req->input('adresse');
-        $user->phone_number = $req->input('phone_number');
+        //$user->first_name = $req->input('first_name');
+        //$user->last_name = $req->input('last_name');
+		//$user->picture = $req->file('picture')->store('users', ['disk' => 'public']);
+		//$user->date_of_birth =Carbon::createFromFormat('d-m-Y', $req->input('date_of_birth'))->format('Y-m-d');
+        //$user->adresse = $req->input('adresse');
+        //$user->phone_number = $req->input('phone_number');
         $user->email = $req->input('email');
 		//$user->password = $req->input('password');
         $user->password = Hash::make( $req->input('password') );
-        $user->owner = $req->input('owner');
+        //$user->owner = $req->input('owner');
         $user->save();
 		//return response()->('message' => 'Success');
         return $user;
