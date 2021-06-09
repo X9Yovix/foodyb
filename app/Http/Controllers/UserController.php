@@ -9,43 +9,50 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    public function register(Request $req){
+    public function register(Request $req)
+    {
         $user = new User();
-        $user->id_card = $req->input('id_card');
-        //$user->first_name = $req->input('first_name');
-        //$user->last_name = $req->input('last_name');
-		//$user->picture = $req->file('picture')->store('users', ['disk' => 'public']);
-		//$user->date_of_birth =Carbon::createFromFormat('d-m-Y', $req->input('date_of_birth'))->format('Y-m-d');
+        //$user->id_card = $req->input('id_card');
+        $user->first_name = $req->input('first_name');
+        $user->last_name = $req->input('last_name');
+        if ($req->file('picture')) {
+            $user->picture = $req->file('picture')->store('users', ['disk' => 'public']);
+        }
+        //$user->date_of_birth =Carbon::createFromFormat('d-m-Y', $req->input('date_of_birth'))->format('Y-m-d');
         //$user->adresse = $req->input('adresse');
         //$user->phone_number = $req->input('phone_number');
         $user->email = $req->input('email');
-		//$user->password = $req->input('password');
-        $user->password = Hash::make( $req->input('password') );
+        //$user->password = $req->input('password');
+        $user->password = Hash::make($req->input('password'));
         //$user->owner = $req->input('owner');
         $user->save();
-		//return response()->('message' => 'Success');
+        //return response()->('message' => 'Success');
         return $user;
         //return "ok";
     }
 
-    public function login(Request $req){
-        $user = User::where('email',$req->email)->first();
-        //kan user faregh  wala pass ghalet
-        if(!$user || !Hash::check($req->password,$user->password)){
-            return response()->json(['error' => 'Email/Password is incorrect']);
-        }else{
-			return $user;
-		}
-        
-    }
-	public function userInfo($id)
+    public function login(Request $req)
     {
-        return User::where('id',$id)->get();
+        $user = User::where('email', $req->email)->first();
+        //kan user faregh  wala pass ghalet
+        if (!$user || !Hash::check($req->password, $user->password)) {
+            return response()->json(['error' => 'Email/Password is incorrect']);
+        } else {
+            return $user;
+        }
     }
-	
-	public function allUser()
+    public function userInfo($id)
+    {
+        return User::where('id', $id)->get();
+    }
+
+    public function allUser()
     {
         return User::all();
+    }
+    public function updateRoleUser($id)
+    {
+        return User::where('id', $id)->update(array('role'=>'restaurant_owner'));
     }
     /**
      * Display a listing of the resource.

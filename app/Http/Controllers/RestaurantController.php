@@ -25,7 +25,7 @@ class RestaurantController extends Controller
         //$restaurant-> state = $res;
 
         //$restaurant-> total_reviews = $req->input('total_reviews');
-        $restaurant->id_card = $req->input('id_card');
+        $restaurant->id_user = $req->input('id_user');
         $restaurant->save();
 
         return $restaurant;
@@ -43,10 +43,14 @@ class RestaurantController extends Controller
         //$res -> slug = $req->input('slug');
         $res->description = $req->input('description');
         $res->adresse = $req->input('adresse');
+		$res->service = $req->input('service');
+		if ($req->file('picture')) {
+		$res->picture = $req->file('picture')->store('restaurant', ['disk' => 'public']);
+		}
         //$res -> adresse = $req->input('adresse');
-        if ($req->file('picture')) {
-            $res->picture->file('picture')->store('restaurant', ['disk' => 'public']);
-        }
+        //if ($req->file('picture')) {
+        //    $res->picture->file('picture')->store('restaurant', ['disk' => 'public']);
+        //}
         //$res -> picture = $req->file('picture')->store('restaurant', ['disk' => 'public']);
         $res->service = $req->input('service');
 
@@ -59,7 +63,9 @@ class RestaurantController extends Controller
     {
         //return Restaurant::where("restaurant_name" ,"like","%$key%")->orWhere("adresse" ,"like","%$key%")->get();
         return Restaurant::where('restaurant_name',"like","%$key%")->orWhere("adresse" ,"like","%$key%")->get();
+		
     }
+    
 
     public function getRestaurant($key)
     {
@@ -68,7 +74,7 @@ class RestaurantController extends Controller
 
     public function getRestaurantIdCard($key)
     {
-        return Restaurant::where("id_card", $key)->get();
+        return Restaurant::where("id_user", $key)->get();
     }
 
     public function deleteRestaurant($key)

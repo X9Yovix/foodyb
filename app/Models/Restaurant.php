@@ -16,4 +16,8 @@ class Restaurant extends Model
         'total_reviews',
         'id_card'
     ];
+
+    public function Reservation(){
+        return $this->hasOne("App\Models\Reservation");
+    }
 }

@@ -20,8 +20,8 @@ class CreateRestaurantsTable extends Migration
             $table->string('adresse');
             $table->string('picture')->nullable();
             $table->json('service')->nullable();
-            $table->double('total_reviews')->nullable();
-            $table->string('id_card',8)->unique();
+            /* $table->double('total_reviews')->nullable(); */
+            $table->string('id_user',8)->unique();
             $table->softDeletes();
             $table->timestamps();
         });

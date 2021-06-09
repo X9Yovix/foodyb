@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+	
+	public function submitContact(Request $req)
+    {
+        $contact = new Contact();
+        $contact->first_name = $req->input('first_name');
+		$contact->last_name = $req->input('last_name');
+		$contact->email = $req->input('email');
+		$contact->phone_number = $req->input('phone_number');
+		$contact->message = $req->input('message');
+        
+        $contact->save();
+
+        return $contact;
+    }
     /**
      * Display a listing of the resource.
      *

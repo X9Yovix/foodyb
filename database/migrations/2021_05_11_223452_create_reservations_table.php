@@ -16,14 +16,16 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('restaurant_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('number_of_guests');
             $table->string('phone_number');
-            $table->date('date_reservation');
-            $table->time('time_reservation');
+            $table->dateTime('date_reservation');
+            $table->string('id_restaurant',8)->unique();
+            /* $table->bigInteger('restaurant_id'); */
+            $table->String('special_req');
+            $table->integer('confirm')->default(0);
         });
     }
 
